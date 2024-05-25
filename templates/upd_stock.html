@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+
+{% block enfant %}
+
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12 col-xl-6 ">
+                <div class="bg-secondary rounded h-100 p-4 ">
+                    <h6 class="mb-4">Floating Label</h6>
+                    
+                    
+                        <form action="{{ url_for('upd_stock', id=stock_info[0]) }}" method="POST">
+    <div class="form-floating mb-3">
+        <input type="hidden" class="form-control" name="id_magasin" value="{{ stock_info[0] }}">
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="id_produit" value="{{ stock_info[1] }}" required disabled>
+        <label for="floatingInput">Nom produit</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="id_magasin" value="{{ stock_info[3] }}" required disabled>
+        <label for="floatingInput">Nom magasin</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="floatingPassword" placeholder="Password" name="quantite" value="{{ stock_info[4] }}" required>
+        <label for="floatingTextarea">Quantité</label>
+    </div>
+    <div class="form-floating">
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </div>
+    </form>
+    </div>
+    </div>
+
+
+{% endblock %}
+

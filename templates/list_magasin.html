@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block enfant %}
+
+    <!-- Content -->
+
+    <div class="container-fluid pt-4 px-4">
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div>
+                        {% for message in messages %}
+                        <i class="fa-solid fa-circle-check"> </i> {{ message }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Recent Salse</h6>
+                <div>
+                    <a href="{{ url_for('export_magasin_pdf') }}" class="btn btn-sm btn-warning">PDF</a>
+                    <a href="{{ url_for('export_magasin_excel') }}" class="btn btn-sm btn-success">excel</a>
+                </div>
+                <a href="{{ url_for('add_from_magasin') }}" class="btn btn-sm btn-success">ajouter</a>
+            </div>
+
+            <div class="d-flex align-items-center mb-4">
+                <form method="post" action="/import_magasin_excel" enctype="multipart/form-data">
+                    <input type="file" name="fichier_excel" accept=".xlsx, .xls">
+                    <input type="submit" value="Importer">
+                </form>      
+            </div>
+
+            <div class="table-responsive mb-4">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-white">
+                            <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                            <th scope="col">id</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">adresse</th>
+                            <th scope="col">Telephone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in magasin %}
+                            <tr>
+                                <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                <td>{{ row.0 }}</td>
+                                <td>{{ row.1 | wordwrap (10)  }}</td>
+                                <td>{{ row.2 | wordwrap (10)  }}</td>
+                                <td>{{ row.3 | wordwrap (10)  }}</td>
+                                <td>{{ row.4 | wordwrap (10)  }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="/upd_magasin/{{ row.0 }}">modifier</a>
+                                    <a href="/delete_magasin/{{ row.0 }}" class="btn btn-sm btn-danger" onclick="return confirm('tu veux le supprimet vraiment?')">surpprimer</a>
+                                </td>                          
+                            </tr>
+                        {%endfor %}    
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination justify-content-center">
+                {{ pagination.links }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Content End -->
+
+
+{% endblock %}

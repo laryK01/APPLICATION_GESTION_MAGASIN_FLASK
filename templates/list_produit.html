@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block enfant %}
+
+    <!-- Content -->
+
+    <div class="container-fluid pt-4 px-4">
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div>
+                        {% for message in messages %}
+                        <i class="fa-solid fa-circle-check"> </i> {{ message }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Recent Salse</h6>
+                <div>
+                    <a href="{{ url_for('export_produit_pdf') }}" class="btn btn-sm btn-warning">PDF</a>
+                    <a href="{{ url_for('export_produit_excel') }}" class="btn btn-sm btn-success">excel</a>
+                </div>
+                <a href="{{ url_for('add_from_produit') }}" class="btn btn-sm btn-success">ajouter</a>
+            </div>
+
+            <div class="d-flex align-items-center mb-4">
+                <form method="post" action="/import_produit_excel" enctype="multipart/form-data">
+                    <input type="file" name="fichier_excel" accept=".xlsx, .xls">
+                    <input type="submit" value="Importer">
+                </form>      
+            </div>
+
+            <div class="table-responsive mb-3">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-white">
+                            <th scope="col">id</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">Categorie</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in produit %}
+                        <tr>
+                            <td>{{ row.0 }}</td>
+                            <td>{{ row.2 | wordwrap (10) }}</td>
+                            <td>{{ row.1| wordwrap (10) }}</td>
+                            <td>{{ row.3  }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info" href="/upd_produit/{{ row.0 }}">modifier</a>
+                                <a class="btn btn-sm btn-danger" href="/delete_produit/{{ row.0 }}" onclick="return confirm('tu veux le supprimet vraiment?')">supprimer</a>     
+                            </td>                            
+                        </tr>
+                        {%endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination justify-content-center">
+                {{ pagination.links }}
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Content End -->
+
+
+{% endblock %}

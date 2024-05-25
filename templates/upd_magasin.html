@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block enfant %}
+
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12 col-xl-6 ">
+                <div class="bg-secondary rounded h-100 p-4 ">
+                    <h6 class="mb-4">Floating Label</h6>
+
+                    <form action="{{ url_for('upd_magasin', id=magasin[0]) }}" method="POST" >
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="nom" required value=" {{ magasin[1] }}">
+                            <label for="floatingInput">nom</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingPassword" placeholder="Password" name="adresse" required value=" {{ magasin[2] }}">
+                            <label for="floatingPassword">adresse</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

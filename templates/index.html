@@ -1,0 +1,126 @@
+
+{% extends 'base.html' %}
+
+{% block enfant %}
+    <!-- Content -->
+
+        <!-- Sale & Revenue Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-line fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">total_Produit</p>
+                            <h6 class="mb-0">{{total_Produit}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total vente</p>
+                            <h6 class="mb-0">{{  total_sale }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-area fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2"> total_client</p>
+                            <h6 class="mb-0">{{total_client}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total Revenue</p>
+                            <h6 class="mb-0">{{total_revenue}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sale & Revenue End -->
+
+
+        <!-- Sales Chart Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Worldwide Sales</h6>
+                            <a href="">Show All</a>
+                        </div>
+                        {{graph|safe}}
+                    </div>
+                </div>
+
+              
+
+
+
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Salse & Revenue</h6>
+                            <a href="">Show All</a>
+                        </div>
+                         {{ graphe|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sales Chart End -->
+
+
+        <!-- Recent Sales Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-secondary text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Recent Salse</h6>
+                    <a href="">Show All</a>
+                </div>
+
+             <div>
+                 {{ cat|safe }}
+             </div>
+            </div>
+        </div>
+        <!-- Recent Sales End -->
+
+
+        <!-- Widgets Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row">
+            <div class="col-sm-12 col-md-7 col-xl-6">
+                <div class="h-100 bg-secondary rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Calendrier</h6>
+                        <a href="#">Afficher Tout</a>
+                    </div>
+                    <div>{{ produit|safe }}</div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-7 col-xl-6">
+                <div class="h-100 bg-secondary rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Calendrier</h6>
+                        <a href="#">Afficher Tout</a>
+                    </div>
+                    <div>{{ client|safe }}</div>
+                </div>
+           </div>
+        </div>
+
+    </div>
+
+        <!-- Widgets End -->      
+
+    <!-- Content End -->
+{% endblock %}

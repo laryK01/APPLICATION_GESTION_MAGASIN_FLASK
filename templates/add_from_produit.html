@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block enfant %}
+
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12 col-xl-6 ">
+                <div class="bg-secondary rounded h-100 p-4 ">
+                    <h6 class="mb-4">Floating Label</h6>
+                    <form action="{{ url_for('add_produit') }}" method="POST" >
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"name="nom" required>
+                            <label for="floatingInput">nom</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="int" class="form-control" id="floatingInput" placeholder="name@example.com" name="categorie" required>
+                            <label for="floatingInput">categorie</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="prix" required id="floatingTextarea" style="height: 150px;"></textarea>
+                            <label for="floatingTextarea">prix</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

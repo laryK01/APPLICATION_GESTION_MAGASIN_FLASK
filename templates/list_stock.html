@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block enfant %}
+
+    <!-- Content -->
+
+    <div class="container-fluid pt-4 px-4">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div>
+                        {% for message in messages %}
+                        <i class="fa-solid fa-circle-check"> </i> {{ message }}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Recent Salse</h6>
+                <div>
+                    <a href="{{ url_for('export_stock_pdf') }}" class="btn btn-sm btn-warning">PDF</a>
+                    <a href="{{ url_for('export_stock_excel') }}" class="btn btn-sm btn-success">excel</a>
+                </div>
+                <a href="{{ url_for('add_from_stock') }}" class="btn btn-sm btn-success">ajouter</a>
+            </div>
+
+            <div class="d-flex align-items-center mb-4">
+                <form action="{{ url_for('list_stock') }}" method="POST">
+                
+                    <div class="row row-cols-auto">
+                        <div class="col">
+                            <label for="product">Produit :</label>
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  name="id_produit">
+                                <option selected disabled value="">{{produit}}</option>
+                                {% for row in products %}
+                                <option value="{{ row.0 }}">{{ row.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div  class="col">
+                            <label for="store">Magasins:</label>
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example"  name="id_magasin">
+                                <option selected disabled value="">{{magas}}</option>
+                                {% for row in stores %}
+                                <option value="{{ row.0 }}">{{ row.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col"><button type="submit" class="btn btn-warning">filtre</button></div>
+
+                    </div >
+
+                </form> 
+            </div>
+
+            <div class="table-responsive mb-3">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-white">
+                            <th>nom de produit</th>
+                            <th>categorie</th>
+                            <th>Quantité en stock </th>
+                            <!-- <th>stock du magasin</th> -->
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in otto %}
+                            <tr>
+                                <td>{{ row.1 }}</td>
+                                <td>{{ row.2 }}</td>
+                                <td>{{ row.3 }}</td>
+                                <!-- <td>{{ row.4 }}</td> -->
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="/upd_stock/{{ row.0 }}">modifier</a>
+                                    <a class="btn btn-sm btn-danger" href="/delete_stock/{{ row.0 }}" onclick="return confirm('tu veux le supprimet vraiment?')">supprimer</a>     
+    
+                                </td>                              
+                            </tr>
+                        {%endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination justify-content-center">
+                {{ pagination.links }}
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Content End -->
+
+
+{% endblock %}
